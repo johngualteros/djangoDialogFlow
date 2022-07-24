@@ -1,0 +1,122 @@
+{% extends 'partials/base.html' %}
+{% block title %}Api Requests Python{% endblock %}
+{% block content %}
+    <main>
+        <h1 class="text-center">Como consumir un api con python</h1>
+        <p class="text-justify">Antes de empezar definamos que es un api application programming interface,
+            ​ es un conjunto de subrutinas, funciones y procedimientos que ofrece cierta biblioteca para
+            ser utilizada por otro software como una capa de abstracción.</p>
+        <p class="text-justify">En el ejemplo usaremos la api publica openWeather. Esta es un api del clima
+            imprimiremos los resultados por la consola </p>
+        <p class="text-justify">Debemos primeramente abrir una carpeta y crear un documento con extensión .py
+            abriremos una consola con el comando <span class="color-green">CONTROL + Ñ</span> y escribir el
+            siguiente comando</p>
+        <pre id="pre_1">
+            <code>
+            <span class="color-orange">pip install requests</span>
+            </code>
+        </pre>
+        <p class="text-justify">Buscamos el api en nuestro caso es la de openWeather
+            <span class="color-green">https://api.openweathermap.org/data/2.5/weather?q={}&appid=YOURKEY&units=metric</span>
+        esta sera nuestro link de la api donde dice YOURKEY es la clave generada al iniciar sesión en openWeather
+        donde estan las llaves {} es donde pondremos el nombre de la ciudad solo es un format de python y el units
+        es para que arroje la temperatura en grados celsius</p>
+        <p class="text-justify">En nuestro archivo creado con la extendion .py importaremos la utilidad instalada anteriormente</p>
+        <pre id="pre_2">
+            <code>
+            <span class="color-purple">import</span> <span class="color-red">requests</span>
+            </code>
+        </pre>
+        <p class="text-justify">
+            pediremos por un input por consola el nombre de la ciudad recoremos que los input que solicitamos por
+            console siempre seran cadenas de texto. Si quisieramos que sea otro tipo como entero decimal etc lo
+            parseamos pero para este caso no es necesarui ya que el nombre de la ciudad es una cadena de texto
+        </p>
+        <p class="text-justify">
+            el metodo/función <span class="color-green">lower()</span> sirve para convertir la entrada de nuestro input
+            a minuscula
+        </p>
+        <pre id="pre_3">
+            <code>
+            <span class="color-purple">import</span> <span class="color-red">requests</span>
+
+            <span class="color-purple">cityName</span><span class="color-red">=</span><span class="color-blue">input</span><span class="color-red">(</span><span class="color-orange">"Enter a city name: "</span><span class="color-red">).</span><span class="color-blue">lower()</span>
+            </code>
+        </pre>
+        <p class="text-justify">
+            ahora guardamos en una variable llamada url como dije antes en las llaves {} pondremos el nombre de la ciudad
+            es para eso que pondremos el format
+        </p>
+        <pre id="pre_4">
+            <code>
+            <span class="color-purple">import</span> <span class="color-red">requests</span>
+
+            <span class="color-purple">cityName</span><span class="color-red">=</span><span class="color-blue">input</span><span class="color-red">(</span><span class="color-orange">"Enter a city name: "</span><span class="color-red">).</span><span class="color-blue">lower()</span>
+
+            <span class="color-purple">url</span><span class="color-red">=</span><span class="color-orange">"https://api.openweathermap.org/data/2.5/weather?q={}&appid=YOURKEY&units=metric"</span><span class="color-blue">.format(</span><span class="color-purple">cityName</span><span class="color-blue">)</span>
+            </code>
+        </pre>
+        <p class="text-justify">
+            guardaremos la respuesta en una variable llamada response despues invocamos un metodo llamado
+            .get de requests recordemos que get es uno de los protocolos http los mas famosos son get, post, put, delete
+            y como argumento es la url de antes
+        </p>
+        <pre id="pre_5">
+            <code>
+            <span class="color-purple">import</span> <span class="color-red">requests</span>
+
+            <span class="color-purple">cityName</span><span class="color-red">=</span><span class="color-blue">input</span><span class="color-red">(</span><span class="color-orange">"Enter a city name: "</span><span class="color-red">).</span><span class="color-blue">lower()</span>
+
+            <span class="color-purple">url</span><span class="color-red">=</span><span class="color-orange">"https://api.openweathermap.org/data/2.5/weather?q={}&appid=YOURKEY&units=metric"</span><span class="color-blue">.format(</span><span class="color-purple">cityName</span><span class="color-blue">)</span>
+
+            <span class="color-purple">response</span><span class="color-red">= requests.</span><span class="color-blue">get(</span><span class="color-yellow">url</span><span class="color-blue">)</span>
+            </code>
+        </pre>
+        <p class="text-justify">
+            despues tendremos que parsear la respuesta a json <span class="color-green">javascript object notation</span>
+        </p>
+        <pre id="pre_6">
+            <code>
+            <span class="color-purple">import</span> <span class="color-red">requests</span>
+
+            <span class="color-purple">cityName</span><span class="color-red">=</span><span class="color-blue">input</span><span class="color-red">(</span><span class="color-orange">"Enter a city name: "</span><span class="color-red">).</span><span class="color-blue">lower()</span>
+
+            <span class="color-purple">url</span><span class="color-red">=</span><span class="color-orange">"https://api.openweathermap.org/data/2.5/weather?q={}&appid=YOURKEY&units=metric"</span><span class="color-blue">.format(</span><span class="color-purple">cityName</span><span class="color-blue">)</span>
+
+            <span class="color-purple">response</span><span class="color-red">= requests.</span><span class="color-blue">get(</span><span class="color-yellow">url</span><span class="color-blue">)</span>
+
+            <span class="color-purple">data</span><span class="color-red">= response</span><span class="color-blue">.json()</span>
+            </code>
+        </pre>
+        <p class="text-justify">
+            despues guardaremos en variables los datos que queremos mostrar por ejemplo en data que es donde tenemos
+            nuestra respuesta en formato json agregaremos dentro de corchetes el arreglo en donde esta el valor que queremos mostrar
+            por ejemplo la velocidad del viento este en un arreglo que se llama wind y el valor es speed <span class="color-green">
+            nos apoyaremos de la documentación para saber donde estan los valores</span> y por ultimo lo imprimiremos por consola.
+        </p>
+        <pre id="pre_7">
+            <code>
+            <span class="color-purple">import</span> <span class="color-red">requests</span>
+
+            <span class="color-purple">cityName</span><span class="color-red">=</span><span class="color-blue">input</span><span class="color-red">(</span><span class="color-orange">"Enter a city name: "</span><span class="color-red">).</span><span class="color-blue">lower()</span>
+
+            <span class="color-purple">url</span><span class="color-red">=</span><span class="color-orange">"https://api.openweathermap.org/data/2.5/weather?q={}&appid=YOURKEY&units=metric"</span><span class="color-blue">.format(</span><span class="color-purple">cityName</span><span class="color-blue">)</span>
+
+            <span class="color-purple">response</span><span class="color-red">= requests.</span><span class="color-blue">get(</span><span class="color-yellow">url</span><span class="color-blue">)</span>
+
+            <span class="color-purple">data</span><span class="color-red">= response</span><span class="color-blue">.json()</span>
+
+            <span class="color-purple">wind_speed</span><span class="color-red">=data</span><span class="color-blue">[<span class="color-orange">"wind"</span>][<span class="color-orange">"speed"</span>]</span>
+            <span class="color-purple">longitude</span><span class="color-red">=data</span><span class="color-blue">[<span class="color-orange">"coord"</span>][<span class="color-orange">"lon"</span>]</span>
+            <span class="color-purple">latitude</span><span class="color-red">=data</span><span class="color-blue">[<span class="color-orange">"coord"</span>][<span class="color-orange">"lat"</span>]</span>
+            <span class="color-purple">description</span><span class="color-red">=data</span><span class="color-blue">[<span class="color-orange">"weather"</span>][<span class="color-orange">0</span>][<span class="color-orange">"description"</span>]</span>
+
+            <span class="color-purple">print(<span class="color-orange">'The temperature is: {} <span class="color-red">\n</span>The wind speed is: {} <span class="color-red">\n</span>The longitude is: {} <span class="color-red">\n</span>The latitude is: {} <span class="color-red">\n</span>
+                The description is: {}'</span><span class="color-blue">.format(<span class="color-red">temperature,wind_speed,longitude,latitude,description</span>)</span>)</span>
+            </code>
+        </pre>
+        <p class="text-justify">
+            con esto ya debería imprimir la respuesta.
+        </p>
+    </main>
+{% endblock %}

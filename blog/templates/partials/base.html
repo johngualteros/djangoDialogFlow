@@ -1,0 +1,70 @@
+{% load sass_tags %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="https://i0.wp.com/4.bp.blogspot.com/-LkqokqmEppg/WpPtc9nKiAI/AAAAAAAAIV8/ZSnKakPXQYQV-iAyLuqdQq82sTexFIwbgCLcBGAs/s1600/anaconda-card.jpg?ssl=1">
+    <link rel="stylesheet" href="{% sass_src 'sass/main.sass' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+<body>
+    {% include 'partials/_navbar.html' %}
+    {% block content %}
+    {% endblock %}
+    <script type="text/javascript">
+        //bot integration here with security don't share the code
+    </script>
+    <script>
+        const body=document.querySelector('body');
+        const button=document.getElementById('changeMode');
+        const pre_1=document.getElementById("pre_1");
+        const pre_2=document.getElementById("pre_2");
+        const pre_3=document.getElementById("pre_3");
+        const pre_4=document.getElementById("pre_4");
+        const pre_5=document.getElementById("pre_5");
+        const pre_6=document.getElementById("pre_6");
+        const pre_7=document.getElementById("pre_7");
+        load();
+
+        button.addEventListener('click',e=>{
+           body.classList.toggle('darkmode');
+            pre_1.classList.toggle('dark');
+            pre_2.classList.toggle('dark');
+            pre_3.classList.toggle('dark');
+            pre_4.classList.toggle('dark');
+            pre_5.classList.toggle('dark');
+            pre_6.classList.toggle('dark');
+            pre_7.classList.toggle('dark');
+            store(body.classList.contains('darkmode'));
+            store(pre_1.classList.contains('dark'));
+            store(pre_2.classList.contains('dark'));
+            store(pre_3.classList.contains('dark'));
+            store(pre_4.classList.contains('dark'));
+            store(pre_5.classList.contains('dark'));
+            store(pre_6.classList.contains('dark'));
+            store(pre_7.classList.contains('dark'));
+            body.classList.contains('darkmode')? button.textContent='light Mode':button.textContent='dark Mode'
+        });
+
+        function load(){
+            const darkmode=localStorage.getItem('darkmode')
+            if(!darkmode){
+                store('false');
+            }else if(darkmode=='true'){
+                body.classList.add('darkmode');
+                pre_1.classList.add('dark');
+                pre_2.classList.add('dark');
+                pre_3.classList.add('dark');
+                pre_4.classList.add('dark');
+                pre_5.classList.add('dark');
+                pre_6.classList.add('dark');
+                pre_7.classList.add('dark');
+            }
+        }
+        function store(value){
+            localStorage.setItem('darkmode', value)
+        }
+    </script>
+</body>
+</html>

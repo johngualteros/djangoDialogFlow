@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap')
+$white: #fff
+$dark: #141414
+$code-light: #e7e7e7
+$code-dark: #111111
+$green: #71FF61
+$purple: #8A61FF
+$red: #FF6161
+$blue: #61C3FF
+$orange: #FFCD61
+@mixin reset-pm()
+  padding: 0
+  margin: 0
+  box-sizing: border-box
+
+@mixin lightMode()
+  background-color: $white
+  color: $dark
+
+@mixin darkMode()
+  background-color: $dark
+  color: $white
+*
+  @include reset-pm()
+  font-family: "Roboto",Arial, sans-serif
+
+@for $i from 1 to 6
+  h#{$i}
+    color: $green
+body
+  @include lightMode()
+  transition: background .5s linear
+body.darkmode
+  @include darkMode()
+  transition: background .5s linear
+::-webkit-scrollbar
+    width: 8px
+
+::-webkit-scrollbar-track
+    background-color: transparent
+
+::-webkit-scrollbar-thumb
+    background-color: $green
+    border-radius: 6px
+
+header
+  width: 100%
+  height: 70px
+  position: fixed
+  background-color: unset
+  backdrop-filter: blur(20px)
+  display: flex
+  padding: 0 20px
+  justify-content: space-between
+  align-items: center
+
+  h1
+    font-size: 2rem
+  a
+    text-decoration: none
+    transition-duration: .5s
+    cursor: pointer
+    color: inherit
+    background-color: $green
+    padding: 5px 10px
+    margin: 3px
+    border: 2px solid $green
+    border-radius: 5px
+    box-shadow: 0 0 5px $green, 0 0 10px $green, 0 0 20px $green
+main
+  padding: 90px 30px
+  width: 60%
+  height: auto
+  min-height: 100vh
+  margin: 0 auto
+
+  pre
+    background-color: $code-light
+    display: flex
+    align-items: center
+  pre.dark
+    background-color: $code-dark
+    display: flex
+    align-items: center
+/*Utils*/
+.text-center
+  text-align: center
+.text-justify
+  text-align: justify
+  margin: 10px 0
+.color-green
+  color: $green
+  font-weight: bold
+.color-purple
+  color: $purple
+  font-weight: bold
+.color-red
+  color: $red
+  font-weight: bold
+.color-blue
+  color: $blue
+  font-weight: bold
+.color-orange
+  color: $orange
+  font-weight: bold
